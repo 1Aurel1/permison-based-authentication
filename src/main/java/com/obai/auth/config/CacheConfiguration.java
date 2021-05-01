@@ -48,6 +48,13 @@ public class CacheConfiguration {
             createCache(cm, com.obai.auth.domain.User.class.getName());
             createCache(cm, com.obai.auth.domain.Authority.class.getName());
             createCache(cm, com.obai.auth.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.obai.auth.domain.Permision.class.getName());
+            createCache(cm, com.obai.auth.domain.Permision.class.getName() + ".resouces");
+            createCache(cm, com.obai.auth.domain.Resouce.class.getName());
+            createCache(cm, com.obai.auth.domain.Resouce.class.getName() + ".rolees");
+            createCache(cm, com.obai.auth.domain.Resouce.class.getName() + ".permisons");
+            createCache(cm, com.obai.auth.domain.Rolee.class.getName());
+            createCache(cm, com.obai.auth.domain.Rolee.class.getName() + ".resouces");
             // jhipster-needle-ehcache-add-entry
         };
     }

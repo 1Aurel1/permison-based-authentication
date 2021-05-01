@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="permision">
+      <h2 data-cy="permisionDetailsHeading"><span jhiTranslate="authApp.permision.detail.title">Permision</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ permision.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.permision.name">Name</span></dt>
+        <dd>
+          <span>{{ permision.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.permision.description">Description</span></dt>
+        <dd>
+          <span>{{ permision.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/permision', permision.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

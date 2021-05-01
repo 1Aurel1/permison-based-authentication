@@ -1,7 +1,12 @@
 package com.obai.auth.config;
 
+import com.obai.auth.domain.Resouce;
+import com.obai.auth.domain.Rolee;
+import com.obai.auth.repository.ResouceRepository;
 import com.obai.auth.security.*;
 import com.obai.auth.security.jwt.*;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -31,16 +36,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
     private final SecurityProblemSupport problemSupport;
 
+    private final ResouceRepository resouceRepository;
+
     public SecurityConfiguration(
         TokenProvider tokenProvider,
         CorsFilter corsFilter,
         JHipsterProperties jHipsterProperties,
-        SecurityProblemSupport problemSupport
+        SecurityProblemSupport problemSupport,
+        ResouceRepository resouceRepository
     ) {
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
         this.jHipsterProperties = jHipsterProperties;
+        this.resouceRepository = resouceRepository;
     }
 
     @Bean
@@ -91,18 +100,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
-            .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN);
+
+        List<Resouce> allWithEagerRelationships = resouceRepository.findAllWithEagerRelationships();
+        allWithEagerRelationships.forEach(resouce -> {
+            try {
+                http
+                    .authorizeRequests()
+                    .antMatchers(HttpMethod.valueOf(resouce.getMethod()), resouce.getAddress())
+                        .hasAnyAuthority(resouce.getRolees().stream().map(rolee -> "ROLE_" + rolee.getName()).toArray(String[]::new));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+            http.authorizeRequests()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/health/**").permitAll()
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/prometheus").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        .and()
+            .and()
             .httpBasic()
-        .and()
+            .and()
             .apply(securityConfigurerAdapter());
         // @formatter:on
+
     }
 
     private JWTConfigurer securityConfigurerAdapter() {

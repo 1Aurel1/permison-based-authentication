@@ -1,0 +1,23 @@
+  entity Permision {
+    name String maxlength(20) required,
+    description String maxlength(150)
+  }
+
+  entity Resouce {
+    address String maxlength(200) required,
+    method String maxlength(30) required,
+    description String maxlength(200),
+  }
+
+  entity Rolee {
+    name String maxlength(20) required,
+      description String maxlength(150),
+  }
+
+  relationship ManyToMany {
+    Resouce{rolee} to Rolee{resouce}
+  }
+
+  relationship ManyToMany {
+    Resouce{permison} to Permision{resouce}
+  }

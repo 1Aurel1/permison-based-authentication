@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="resouce">
+      <h2 data-cy="resouceDetailsHeading"><span jhiTranslate="authApp.resouce.detail.title">Resouce</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ resouce.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.resouce.address">Address</span></dt>
+        <dd>
+          <span>{{ resouce.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.resouce.method">Method</span></dt>
+        <dd>
+          <span>{{ resouce.method }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.resouce.description">Description</span></dt>
+        <dd>
+          <span>{{ resouce.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="authApp.resouce.rolee">Rolee</span></dt>
+        <dd>
+          <span *ngFor="let rolee of resouce.rolees; let last = last">
+            <a [routerLink]="['/rolee', rolee?.id, 'view']">{{ rolee.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="authApp.resouce.permison">Permison</span></dt>
+        <dd>
+          <span *ngFor="let permison of resouce.permisons; let last = last">
+            <a [routerLink]="['/permision', permison?.id, 'view']">{{ permison.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/resouce', resouce.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

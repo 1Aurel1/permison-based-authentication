@@ -1,0 +1,26 @@
+{
+  "authApp": {
+    "rolee": {
+      "home": {
+        "title": "Rolees",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Rolee",
+        "createOrEditLabel": "Create or edit a Rolee",
+        "notFound": "No Rolees found"
+      },
+      "created": "A new Rolee is created with identifier {{ param }}",
+      "updated": "A Rolee is updated with identifier {{ param }}",
+      "deleted": "A Rolee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Rolee {{ id }}?"
+      },
+      "detail": {
+        "title": "Rolee"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "resouce": "Resouce"
+    }
+  }
+}

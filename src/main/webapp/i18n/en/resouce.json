@@ -1,0 +1,28 @@
+{
+  "authApp": {
+    "resouce": {
+      "home": {
+        "title": "Resouces",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Resouce",
+        "createOrEditLabel": "Create or edit a Resouce",
+        "notFound": "No Resouces found"
+      },
+      "created": "A new Resouce is created with identifier {{ param }}",
+      "updated": "A Resouce is updated with identifier {{ param }}",
+      "deleted": "A Resouce is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Resouce {{ id }}?"
+      },
+      "detail": {
+        "title": "Resouce"
+      },
+      "id": "ID",
+      "address": "Address",
+      "method": "Method",
+      "description": "Description",
+      "rolee": "Rolee",
+      "permison": "Permison"
+    }
+  }
+}
